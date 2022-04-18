@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4C5BF3"
+    >
+
+    <TextView
+
+        android:id="@+id/pc1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="First set passcode to go ahead"
+        android:textSize="25dp"
+        android:textColor="#FFFFFF"
+        ></TextView>
+
+    <ImageView
+        
+        android:id="@+id/img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/pc1"
+        android:layout_marginTop="5dp"
+        android:layout_centerHorizontal="true"
+         android:textColor="#FFFFFF"
+        android:background="@drawable/iconslock2"></ImageView>
+
+    <TextView
+
+        android:id="@+id/t2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="Your Passcode will be used Every time When u enter the app and its design to keep treepasser out"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="12dp"></TextView>
+
+     <EditText
+        android:id="@+id/setedt"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/t2"
+        android:hint="Enter Password"
+        android:textColorHint="@drawable/abc_ic_arrow_drop_right_black_24dp"
+        android:textAlignment="center"
+        android:textSize="15dp"
+        android:background="#FFFFFF"
+    
+        ></EditText>
+    
+     <EditText
+        android:id="@+id/setedt2"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberPassword"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/setedt"
+        android:layout_marginTop="10dp"
+        android:background="#FFFFFF"
+        android:hint="Confirm Password"
+        android:textColorHint="@drawable/abc_ic_arrow_drop_right_black_24dp"
+        android:textAlignment="center"
+        android:textSize="15dp"
+       
+        ></EditText>
+    
+       <Button
+        
+        android:id="@+id/psetbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Confirm"
+        android:textColorHint="#FFFFFF"
+        android:textAlignment="center"
+        android:layout_below="@+id/setedt2"
+        android:layout_marginTop="12dp"
+         ></Button>
+
+</RelativeLayout>
