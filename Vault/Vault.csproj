@@ -103,9 +103,9 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArrayList.cs" />
     <Compile Include="CreatePin.cs" />
     <Compile Include="Dashbor.cs" />
+    <Compile Include="FolderAdapter.cs" />
     <Compile Include="FoldersGS.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />

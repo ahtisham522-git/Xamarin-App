@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using AndroidX.RecyclerView.Widget;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,16 +20,30 @@ namespace Vault
 
         Dialog dialog;
 
-        Button confirm, cancel,add;
+        Button confirm, cancel, add;
         EditText foldername;
+        private RecyclerView folderRecycler;
+        private Context folderContx;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.Dashboard);
 
-           add = FindViewById<Button>(Resource.Id.psetn);
-           add.Click += popup;
+            add = FindViewById<Button>(Resource.Id.psetn);
+            add.Click += popup;
+
+
+            List<imageFolder> folders = Getfolders();
+            
+          if(folders!= null)
+            {
+                RecyclerView.Adapter folderAdapter = new FolderAdapter(folders,folderContx);
+                folderRecycler.SetAdapter(folderAdapter);
+                folderAdapter.NotifyDataSetChanged();
+
+            }
         }
         private void popup(object sender, EventArgs e)
         {
@@ -39,7 +54,7 @@ namespace Vault
             dialog.SetCancelable(false);
             dialog.Window.SetSoftInputMode(SoftInput.AdjustResize);
 
-          
+
 
             //dialog Buttons
             confirm = dialog.FindViewById<Button>(Resource.Id.okfname);
@@ -53,7 +68,7 @@ namespace Vault
 
         }
 
-     
+
         private void cancl(object sender, EventArgs e)
         {
 
@@ -86,55 +101,34 @@ namespace Vault
             }
         }
 
-
-
-        private ArrayList<imageFolder> GetPicturePaths()
+        public List<imageFolder> Getfolders()
         {
 
             List<imageFolder> picFolders = new List<imageFolder>();
-
             string rootPath = Android.App.Application.Context.GetExternalFilesDir(null).ToString();
-                List<String> picPaths = new List<String>();
-
-                List<int> filecount = new List<int>();
-
-           Java.IO.File myDir = new Java.IO.File(rootPath);
-
-              
-                String folder = myDir.Name;
-            String folderq = myDir.AbsolutePath;
-
+            List<String> picPaths = new List<String>();
+            string[] files = Directory.GetDirectories(rootPath);
             //list of file to be counted
-
-            myDir.ListFiles();
-            
-                for (File inFile : myDir) {
-                if (inFile.isDirectory())
-                {
-                    fldernames.add(inFile.getName());
-                    picPaths.add(inFile.getPath());
-                    filecount.add(inFile.listFiles().length);
-                }
+            for (int i = 0; i < files.Length; i++)
+            {
+                picPaths.Add(files[i]);
             }
+
             if (picPaths != null)
             {
-                for (int s = 0; s < fldernames.size(); s++)
+                for (int s = 0; s < files.Length; s++)
                 {
                     imageFolder folds = new imageFolder();
-                    String foldername = fldernames.get(s);
-                    String folderpaths = picPaths.get(s);
-                    int numofpc = filecount.get(s);
-                    folds.setPath(folderpaths);
+                    string foldername = Path.GetDirectoryName(files[s]);
                     folds.setFolderName(foldername);
-                    folds.setNumberOfPics(numofpc);
-                    picFolders.add(folds);
-
-                    //   folds.setFirstPic(datapath);//if the folder has only one picture this line helps to set it as first so as to avoid blank image in itemview
-                    //  folds.addpics();
+                    picFolders.Add(folds);
                 }
             }
+
             return picFolders;
         }
 
     }
 }
+    
+
